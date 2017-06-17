@@ -11,6 +11,8 @@ def get_content_types():
     content_type_pks = []
     for ct in ContentType.objects.all():
         model = ct.model_class()
+        if not model:
+            continue
         if model is not None:
             for f in model._meta.fields:
                 if type(f) is StateField:
